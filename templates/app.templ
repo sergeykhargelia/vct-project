@@ -1,0 +1,118 @@
+package templates
+
+import "github.com/sergeykhargelia/vct-project/model"
+
+templ LoginPage() {
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <h1>Login</h1>
+    <form hx-post="/login" hx-target="#result" hx-redirect="/">
+        <input name="email" placeholder="email" required/>
+        <input name="password" type="password" placeholder="password" required/>
+        <button type="submit">Login</button>
+    </form>
+    <div id="result"></div>
+    <p><a href="/register">Register</a></p>
+</body>
+</html>
+}
+
+templ RegisterPage() {
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <h1>Register</h1>
+    <form hx-post="/register" hx-target="#result">
+        <input name="name" placeholder="name" required/>
+        <input name="email" placeholder="email" required/>
+        <input name="password" type="password" placeholder="password" required/>
+        <button type="submit">Register</button>
+    </form>
+    <div id="result"></div>
+    <p><a href="/login">Login</a></p>
+</body>
+</html>
+}
+
+templ Dashboard() {
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <h1>Dashboard</h1>
+
+    <h2>Regular Expenses</h2>
+    <div id="expenses-list" hx-get="/regular_expenses" hx-trigger="load">
+        Loading...
+    </div>
+
+    <h2>Add Expense</h2>
+    <form hx-post="/regular_expenses" hx-target="#message" hx-swap="innerHTML">
+    <div>
+        <label>Name <span style="color: red;">*</span></label>
+        <input name="name" placeholder="name" required/>
+    </div>
+    
+    <div>
+        <label>Description</label>
+        <input name="description" placeholder="Optional description"/>
+    </div>
+    
+    <div>
+        <label>Next Date <span style="color: red;">*</span></label>
+        <input name="nextDate" type="date" required/>
+    </div>
+    
+    <div>
+        <label>Frequency <span style="color: red;">*</span></label>
+        <select name="frequency" required>
+            <option value="">Select frequency</option>
+            <option value="1 day">Daily</option>
+            <option value="1 week">Weekly</option>
+            <option value="1 month">Monthly</option>
+            <option value="1 year">Yearly</option>
+        </select>
+    </div>
+    
+    <div>
+        <label>Amount <span style="color: red;">*</span></label>
+        <input name="amount" type="number" step="1" min="0" placeholder="0" required/>
+    </div>
+    
+    <button type="submit">Add</button>
+    </form>
+
+    <div id="message"></div>
+</body>
+</html>
+}
+
+templ ExpensesList(expenses []model.RegularExpense) {
+    <div>
+        for _, expense := range expenses {
+            <div style="border: 1px solid #ccc; padding: 10px; margin: 5px 0;">
+                { expense.Name } - { expense.Amount } ({ expense.Frequency })
+                <small>ID: { expense.ID }</small>
+            </div>
+        }
+
+        if len(expenses) == 0 {
+            <p>No expenses yet</p>
+        }
+    </div>
+}
+
+templ ErrorMessage(msg string) {
+<div style="color: red; padding: 10px; border: 1px solid red;">
+    { msg }
+</div>
+}
