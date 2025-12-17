@@ -32,6 +32,21 @@ spec:
             secretKeyRef:
               name: app-secret
               key: POSTGRES_PASSWORD
+        - name: GMAIL_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: GMAIL_USERNAME
+        - name: GMAIL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: GMAIL_PASSWORD
+        - name: jwt
+        valueFrom:
+          secretKeyRef:
+            name: app-secret
+            key: jwt
         resources:
           requests:
             memory: "256Mi"

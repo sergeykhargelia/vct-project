@@ -16,7 +16,7 @@ import (
 
 func setupDailyRoutine(s *server.Server) {
 	c := cron.New()
-	c.AddFunc("0 0 * * * ", func() {
+	c.AddFunc("*/5 * * * * ", func() {
 		currentDate := time.Now()
 		s.DoRegularPayments(currentDate.Format(time.DateOnly))
 
