@@ -9,8 +9,9 @@ import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
 import "github.com/sergeykhargelia/vct-project/model"
+import "fmt"
 
-func LoginPage() templ.Component {
+func Dashboard() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -31,65 +32,7 @@ func LoginPage() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html><head><script src=\"https://unpkg.com/htmx.org@1.9.10\"></script></head><body><h1>Login</h1><form hx-post=\"/login\" hx-target=\"#result\" hx-redirect=\"/\"><input name=\"email\" placeholder=\"email\" required> <input name=\"password\" type=\"password\" placeholder=\"password\" required> <button type=\"submit\">Login</button></form><div id=\"result\"></div><p><a href=\"/register\">Register</a></p></body></html>")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		return nil
-	})
-}
-
-func RegisterPage() templ.Component {
-	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
-		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
-		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
-			return templ_7745c5c3_CtxErr
-		}
-		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
-		if !templ_7745c5c3_IsBuffer {
-			defer func() {
-				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
-				if templ_7745c5c3_Err == nil {
-					templ_7745c5c3_Err = templ_7745c5c3_BufErr
-				}
-			}()
-		}
-		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var2 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var2 == nil {
-			templ_7745c5c3_Var2 = templ.NopComponent
-		}
-		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<!doctype html><html><head><script src=\"https://unpkg.com/htmx.org@1.9.10\"></script></head><body><h1>Register</h1><form hx-post=\"/register\" hx-target=\"#result\"><input name=\"name\" placeholder=\"name\" required> <input name=\"email\" placeholder=\"email\" required> <input name=\"password\" type=\"password\" placeholder=\"password\" required> <button type=\"submit\">Register</button></form><div id=\"result\"></div><p><a href=\"/login\">Login</a></p></body></html>")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		return nil
-	})
-}
-
-func Dashboard() templ.Component {
-	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
-		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
-		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
-			return templ_7745c5c3_CtxErr
-		}
-		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
-		if !templ_7745c5c3_IsBuffer {
-			defer func() {
-				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
-				if templ_7745c5c3_Err == nil {
-					templ_7745c5c3_Err = templ_7745c5c3_BufErr
-				}
-			}()
-		}
-		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var3 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var3 == nil {
-			templ_7745c5c3_Var3 = templ.NopComponent
-		}
-		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<!doctype html><html><head><script src=\"https://unpkg.com/htmx.org@1.9.10\"></script></head><body><h1>Dashboard</h1><h2>Regular Expenses</h2><div id=\"expenses-list\" hx-get=\"/regular_expenses\" hx-trigger=\"load\">Loading...</div><h2>Add Expense</h2><form hx-post=\"/regular_expenses\" hx-target=\"#message\" hx-swap=\"innerHTML\"><div><label>Name <span style=\"color: red;\">*</span></label> <input name=\"name\" placeholder=\"name\" required></div><div><label>Description</label> <input name=\"description\" placeholder=\"Optional description\"></div><div><label>Next Date <span style=\"color: red;\">*</span></label> <input name=\"nextDate\" type=\"date\" required></div><div><label>Frequency <span style=\"color: red;\">*</span></label> <select name=\"frequency\" required><option value=\"\">Select frequency</option> <option value=\"1 day\">Daily</option> <option value=\"1 week\">Weekly</option> <option value=\"1 month\">Monthly</option> <option value=\"1 year\">Yearly</option></select></div><div><label>Amount <span style=\"color: red;\">*</span></label> <input name=\"amount\" type=\"number\" step=\"1\" min=\"0\" placeholder=\"0\" required></div><button type=\"submit\">Add</button></form><div id=\"message\"></div></body></html>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html class=\"dark\"><head><script src=\"https://unpkg.com/htmx.org@1.9.10\"></script><script src=\"https://cdn.tailwindcss.com\"></script><script>\n        tailwind.config = {\n            darkMode: 'class',\n            theme: { extend: { colors: { primary: '#3b82f6' } } }\n        }\n    </script><title>Dashboard</title></head><body class=\"bg-gradient-to-br dark:from-gray-900 dark:to-gray-800 from-indigo-50 to-blue-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8\"><div class=\"max-w-6xl mx-auto\"><div class=\"text-center mb-16 leading-relaxed\"><h1 class=\"text-5xl sm:text-6xl font-bold bg-gradient-to-r from-primary via-blue-600 to-purple-600 bg-clip-text text-transparent mb-4 leading-none tracking-tight pb-3 -mb-2\">Dashboard</h1></div><div class=\"grid lg:grid-cols-2 gap-12 items-start\"><div class=\"lg:order-2\"><h2 class=\"text-3xl font-bold text-gray-900 dark:text-white mb-8 flex items-center gap-3\"><div class=\"w-12 h-12 bg-gradient-to-r from-emerald-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg\"><svg class=\"w-6 h-6 text-white\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11H9m0 0l3-3m0 0l3 3m-3-3v6\"></path></svg></div>Regular Expenses</h2><div id=\"expenses-list\" class=\"bg-white/70 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl p-8 border border-white/50 dark:border-gray-700/50 shadow-2xl min-h-[400px] hx-swapping:animate-pulse\" hx-get=\"/regular_expenses\" hx-trigger=\"load\" hx-swap=\"innerHTML\"><div class=\"flex items-center justify-center h-64 text-gray-500 dark:text-gray-400\"><div class=\"animate-spin rounded-full h-12 w-12 border-b-2 border-primary\"></div><span class=\"ml-3 text-lg\">Loading expenses...</span></div></div></div><div class=\"lg:order-1\"><h2 class=\"text-3xl font-bold text-gray-900 dark:text-white mb-8 flex items-center gap-3\"><div class=\"w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg\"><svg class=\"w-6 h-6 text-white\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 6v6m0 0v6m0-6h6m-6 0H6\"></path></svg></div>Add Expense</h2><div class=\"bg-white/70 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl p-8 border border-white/50 dark:border-gray-700/50 shadow-2xl\"><form hx-post=\"/regular_expenses\" hx-target=\"#message\" hx-swap=\"innerHTML\" hx-indicator=\"#form-loading\" novalidate><div class=\"space-y-6\"><div><label class=\"block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3 flex items-center gap-1\">Name <span class=\"text-red-500 text-lg\">*</span></label> <input name=\"name\" placeholder=\"e.g. Internet bill\" required class=\"w-full px-5 py-4 bg-white/50 dark:bg-gray-700/50 border-2 border-gray-200 dark:border-gray-600 rounded-2xl focus:ring-3 focus:ring-primary/30 focus:border-primary transition-all duration-300 text-lg placeholder-gray-500 shadow-sm\"></div><div><label class=\"block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3\">Description</label> <input name=\"description\" placeholder=\"Optional details...\" class=\"w-full px-5 py-4 bg-white/50 dark:bg-gray-700/50 border-2 border-gray-200 dark:border-gray-600 rounded-2xl focus:ring-3 focus:ring-primary/30 focus:border-primary transition-all duration-300 text-lg placeholder-gray-500 shadow-sm\"></div><div class=\"grid grid-cols-1 md:grid-cols-2 gap-6\"><div><label class=\"block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3 flex items-center gap-1\">Next Date <span class=\"text-red-500 text-lg\">*</span></label> <input name=\"nextDate\" type=\"date\" required class=\"w-full px-5 py-4 bg-white/50 dark:bg-gray-700/50 border-2 border-gray-200 dark:border-gray-600 rounded-2xl focus:ring-3 focus:ring-primary/30 focus:border-primary transition-all duration-300 text-lg shadow-sm\"></div><div><label class=\"block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3 flex items-center gap-1\">Amount <span class=\"text-red-500 text-lg\">*</span></label> <input name=\"amount\" type=\"number\" step=\"1\" min=\"0\" placeholder=\"0\" required class=\"w-full px-5 py-4 bg-white/50 dark:bg-gray-700/50 border-2 border-gray-200 dark:border-gray-600 rounded-2xl focus:ring-3 focus:ring-primary/30 focus:border-primary transition-all duration-300 text-lg shadow-sm\"></div></div><div><label class=\"block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3 flex items-center gap-1\">Frequency <span class=\"text-red-500 text-lg\">*</span></label> <select name=\"frequency\" required class=\"w-full px-5 py-4 bg-white/50 dark:bg-gray-700/50 border-2 border-gray-200 dark:border-gray-600 rounded-2xl focus:ring-3 focus:ring-primary/30 focus:border-primary transition-all duration-300 text-lg shadow-sm appearance-none bg-no-repeat pr-12\"><option value=\"\">Select frequency</option> <option value=\"1 day\">Daily</option> <option value=\"1 week\">Weekly</option> <option value=\"1 month\">Monthly</option> <option value=\"1 year\">Yearly</option></select></div><button type=\"submit\" class=\"w-full bg-gradient-to-r from-emerald-500 to-green-600 text-white py-5 px-8 rounded-2xl font-bold text-xl shadow-2xl hover:shadow-3xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-3 group\"><span>Add Expense</span><div id=\"form-loading\" class=\"htmx-indicator inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-white hidden group-hover:animate-pulse\"></div></button></div></form><div id=\"message\" class=\"mt-8 min-h-[2rem]\"></div></div></div></div></div></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -113,120 +56,116 @@ func ExpensesList(expenses []model.RegularExpense) templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var4 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var4 == nil {
-			templ_7745c5c3_Var4 = templ.NopComponent
+		templ_7745c5c3_Var2 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var2 == nil {
+			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<div class=\"space-y-4\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
-		}
-		for _, expense := range expenses {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<div style=\"border: 1px solid #ccc; padding: 10px; margin: 5px 0;\">")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			var templ_7745c5c3_Var5 string
-			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(expense.Name)
-			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/app.templ`, Line: 103, Col: 30}
-			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, " - ")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			var templ_7745c5c3_Var6 string
-			templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(expense.Amount)
-			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/app.templ`, Line: 103, Col: 51}
-			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, " (")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			var templ_7745c5c3_Var7 string
-			templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(expense.Frequency)
-			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/app.templ`, Line: 103, Col: 74}
-			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, ") <small>ID: ")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			var templ_7745c5c3_Var8 string
-			templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(expense.ID)
-			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/app.templ`, Line: 104, Col: 39}
-			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "</small></div>")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
 		}
 		if len(expenses) == 0 {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<p>No expenses yet</p>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<div class=\"text-center py-16 text-gray-500 dark:text-gray-400\"><svg class=\"w-16 h-16 mx-auto mb-4 text-gray-400 opacity-50\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z\"></path></svg><p class=\"text-xl font-medium\">No regular expenses yet</p></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "</div>")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		return nil
-	})
-}
-
-func ErrorMessage(msg string) templ.Component {
-	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
-		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
-		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
-			return templ_7745c5c3_CtxErr
-		}
-		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
-		if !templ_7745c5c3_IsBuffer {
-			defer func() {
-				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
-				if templ_7745c5c3_Err == nil {
-					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+		} else {
+			for _, expense := range expenses {
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<div class=\"group bg-gradient-to-r from-white/60 to-gray-50/60 dark:from-gray-800/70 dark:to-gray-700/70 backdrop-blur-xl border border-white/40 dark:border-gray-600/50 rounded-3xl p-6 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex justify-between items-start gap-4\"><div class=\"flex-1 min-w-0\"><h3 class=\"text-2xl font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors\">")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
 				}
-			}()
-		}
-		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var9 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var9 == nil {
-			templ_7745c5c3_Var9 = templ.NopComponent
-		}
-		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, "<div style=\"color: red; padding: 10px; border: 1px solid red;\">")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		var templ_7745c5c3_Var10 string
-		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(msg)
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/app.templ`, Line: 116, Col: 9}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
+				var templ_7745c5c3_Var3 string
+				templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(expense.Name)
+				if templ_7745c5c3_Err != nil {
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/app.templ`, Line: 135, Col: 138}
+				}
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</h3><p class=\"text-gray-600 dark:text-gray-300 mt-1\">")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				var templ_7745c5c3_Var4 string
+				templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(expense.Description)
+				if templ_7745c5c3_Err != nil {
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/app.templ`, Line: 136, Col: 90}
+				}
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</p><p class=\"text-sm text-gray-500 dark:text-gray-400 mt-2 flex items-center gap-4 flex-wrap\"><span class=\"px-3 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 rounded-2xl text-xs font-medium flex items-center gap-1.5 shadow-sm\"><svg class=\"w-4 h-4\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"10\"></circle> <polyline points=\"12,6 12,12 16,14\"></polyline></svg> ")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				var templ_7745c5c3_Var5 string
+				templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs((*expense.NextDate)[:10])
+				if templ_7745c5c3_Err != nil {
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/app.templ`, Line: 143, Col: 50}
+				}
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "</span> <span class=\"px-3 py-2 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 rounded-2xl text-xs font-medium flex items-center gap-1.5 shadow-sm\"><svg class=\"w-4 h-4\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10\"></path></svg> ")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				if expense.Frequency[2] == 'd' {
+					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "daily")
+					if templ_7745c5c3_Err != nil {
+						return templ_7745c5c3_Err
+					}
+				} else {
+					var templ_7745c5c3_Var6 string
+					templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(expense.Frequency[2:])
+					if templ_7745c5c3_Err != nil {
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/app.templ`, Line: 153, Col: 51}
+					}
+					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
+					if templ_7745c5c3_Err != nil {
+						return templ_7745c5c3_Err
+					}
+					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "ly")
+					if templ_7745c5c3_Err != nil {
+						return templ_7745c5c3_Err
+					}
+				}
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "</span></p></div><div class=\"text-right flex-shrink-0\"><div class=\"text-3xl font-bold text-emerald-600 dark:text-emerald-400\">")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				var templ_7745c5c3_Var7 string
+				templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(expense.Amount)
+				if templ_7745c5c3_Err != nil {
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/app.templ`, Line: 161, Col: 40}
+				}
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "&nbsp;₽</div></div><button hx-delete=\"")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				var templ_7745c5c3_Var8 string
+				templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("/regular_expenses/%d", expense.ID))
+				if templ_7745c5c3_Err != nil {
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/app.templ`, Line: 165, Col: 83}
+				}
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, "\" class=\"absolute -top-3 -right-3 w-12 h-12 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-3xl shadow-2xl hover:shadow-3xl hover:scale-110 active:scale-95 transition-all duration-200 flex items-center justify-center group/delete opacity-0 group-hover:opacity-100 hover:bg-red-600 border-2 border-white/50\" title=\"Delete expense\"><svg class=\"w-5 h-5\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16\"></path></svg><div class=\"absolute -inset-1.5 bg-red-500/20 rounded-3xl blur opacity-0 group-hover/delete:opacity-100 transition-opacity duration-200\"></div></button></div>")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+			}
 		}
 		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 13, "</div>")
 		if templ_7745c5c3_Err != nil {

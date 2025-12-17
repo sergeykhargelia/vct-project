@@ -118,12 +118,7 @@ func AuthMiddleware(next http.HandlerFunc) http.HandlerFunc {
 			return jwtSecret, nil
 		})
 
-		if err != nil || !token.Valid {
-			templates.ErrorMessage("Invalid token").Render(r.Context(), w)
-			return
-		}
-
-		if claims.ExpiresAt.Time.Before(time.Now()) {
+		if err != nil || !token.Valid || claims.ExpiresAt.Time.Before(time.Now()) {
 			http.Redirect(w, r, "/login", http.StatusSeeOther)
 			return
 		}

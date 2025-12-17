@@ -49,22 +49,23 @@ func (s *Server) CreateRegularExpense(w http.ResponseWriter, r *http.Request) {
 func (s *Server) DeleteRegularExpense(w http.ResponseWriter, r *http.Request) {
 	regular_expense_id, err := strconv.ParseUint(mux.Vars(r)["regular_expense_id"], 10, 64)
 	if err != nil {
-		http.Error(w, "Invalid regular expense id", http.StatusBadRequest)
+		templates.ErrorMessage("Invalid regular expense id").Render(r.Context(), w)
 		return
 	}
 
 	result := s.DB.Model(&model.RegularExpense{}).Where("id = ?", regular_expense_id).Update("next_date", nil)
 	if result.Error != nil {
-		http.Error(w, "Failed to delete regular expense", http.StatusInternalServerError)
+		templates.ErrorMessage("Failed to delete regular expense").Render(r.Context(), w)
 		return
 	}
 
 	if result.RowsAffected == 0 {
-		http.Error(w, "Regular expense not found", http.StatusNotFound)
+		templates.ErrorMessage("Regular expense not found").Render(r.Context(), w)
 		return
 	}
 
-	w.WriteHeader(http.StatusNoContent)
+	w.Header().Set("HX-Redirect", "/")
+	w.WriteHeader(http.StatusOK)
 }
 
 func (s *Server) GetUserRegularExpenses(w http.ResponseWriter, r *http.Request) {
@@ -75,7 +76,7 @@ func (s *Server) GetUserRegularExpenses(w http.ResponseWriter, r *http.Request) 
 	}
 
 	var regularExpenses []model.RegularExpense
-	if s.DB.Where("user_id = ? AND next_date IS NOT NULL", userID).Find(&regularExpenses).Error != nil {
+	if s.DB.Where("user_id = ? AND next_date IS NOT NULL", userID).Order("next_date asc").Find(&regularExpenses).Error != nil {
 		templates.ErrorMessage("Error while finding regular expenses")
 		return
 	}
