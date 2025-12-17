@@ -14,7 +14,6 @@ type Metrics struct {
 }
 
 func InitMetrics(registerInPrometheus bool) *Metrics {
-	//
 	return &Metrics{}
 }
 

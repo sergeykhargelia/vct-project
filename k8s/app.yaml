@@ -43,10 +43,10 @@ spec:
               name: app-secret
               key: GMAIL_PASSWORD
         - name: jwt
-        valueFrom:
-          secretKeyRef:
-            name: app-secret
-            key: jwt
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: jwt
         resources:
           requests:
             memory: "256Mi"
