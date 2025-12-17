@@ -44,6 +44,7 @@ func main() {
 	router.HandleFunc("/login", s.LoginHandler).Methods(http.MethodPost)
 	router.HandleFunc("/register", s.RegisterPage).Methods(http.MethodGet)
 	router.HandleFunc("/login", s.LoginPage).Methods(http.MethodGet)
+	router.HandleFunc("/health", s.Health).Methods(http.MethodGet)
 
 	router.HandleFunc("/", server.AuthMiddleware(s.MainPage)).Methods(http.MethodGet)
 	router.HandleFunc("/regular_expenses", server.AuthMiddleware(s.CreateRegularExpense)).Methods(http.MethodPost)

@@ -42,7 +42,7 @@ jobs:
         context: .
         push: true
         tags: |
-          cr.yandex/${{ secrets.REGISTRY_ID }}/vct-project:${{ github.sha }}
-          cr.yandex/${{ secrets.REGISTRY_ID }}/vct-project:latest
+          cr.yandex/crpg9e72r0qh6d961qpr/vct-project:${{ github.sha }}
+          cr.yandex/crpg9e72r0qh6d961qpr/vct-project:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max

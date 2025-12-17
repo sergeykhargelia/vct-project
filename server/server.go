@@ -28,6 +28,10 @@ func (s *Server) MainPage(w http.ResponseWriter, r *http.Request) {
 	templates.Dashboard().Render(r.Context(), w)
 }
 
+func (s *Server) Health(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+}
+
 func (s *Server) DoRegularPayments(date string) error {
 	return s.DB.Transaction(func(tx *gorm.DB) error {
 		var updatedExpenses []model.RegularExpense

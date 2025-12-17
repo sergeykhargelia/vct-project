@@ -9,7 +9,6 @@ require (
 	github.com/golang-jwt/jwt/v5 v5.3.0
 	github.com/gorilla/mux v1.8.1
 	github.com/robfig/cron v1.2.0
-	github.com/sergeykhargelia/vct-project/backend v0.0.0-20251203023339-e6a99ccc519b
 	golang.org/x/crypto v0.46.0
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 	gorm.io/driver/postgres v1.6.0
