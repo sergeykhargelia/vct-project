@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/robfig/cron"
 	"github.com/sergeykhargelia/vct-project/database"
 	"github.com/sergeykhargelia/vct-project/server"
@@ -30,6 +31,11 @@ func initEmailSender() *gomail.Dialer {
 	return gomail.NewDialer("smtp.gmail.com", 587, username, password)
 }
 
+const (
+	HttpPort       = ":8080"
+	PrometheusPort = ":2112"
+)
+
 func main() {
 	db, err := database.InitDB()
 	if err != nil {
@@ -38,6 +44,14 @@ func main() {
 
 	s := &server.Server{DB: db, EmailSender: initEmailSender()}
 	setupDailyRoutine(s)
+
+	go func() {
+		http.Handle("/metrics", promhttp.Handler())
+		err := http.ListenAndServe(PrometheusPort, nil)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}()
 
 	router := mux.NewRouter()
 	router.HandleFunc("/register", s.RegisterHandler).Methods(http.MethodPost)
@@ -53,5 +67,5 @@ func main() {
 	router.HandleFunc("/expenses", server.AuthMiddleware(s.GetUserExpenses)).Methods(http.MethodGet)
 
 	log.Println("Server started")
-	log.Fatal(http.ListenAndServe(":8080", router))
+	log.Fatal(http.ListenAndServe(HttpPort, router))
 }
